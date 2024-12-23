@@ -9,4 +9,32 @@ public class Message {
     public final Date date;
 
 
+    public Message(byte[] data) {
+        this.data = data;
+        //המרה לביית בקידוד UTF8
+        this.asText = new String(data,java.nio.charset.StandardCharsets.UTF_8);
+        this.asDouble = tryparseFromText(this.asText);
+        this.date = new Date();
+    }
+
+    public Message(String asText) {
+        this(asText.getBytes());
+    }
+
+    public Message(double asDouble) {
+        this(Double.toString(asDouble));
+    }
+
+    private double tryparseFromText(String text)  {
+        try {
+            return Double.parseDouble(text);
+        }
+        catch (NumberFormatException nfe)
+        {
+            System.out.println(nfe.getMessage());
+        }
+        return Double.NaN;
+    }
+
 }
+
