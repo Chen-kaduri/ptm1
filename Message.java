@@ -11,7 +11,7 @@ public class Message {
 
     public Message(byte[] data) {
         this.data = data;
-        //המרה לבייט בקידוד UTF8
+        //Conversion to byte in UTF8 encoding
         this.asText = new String(data,java.nio.charset.StandardCharsets.UTF_8);
         this.asDouble = tryparseFromText(this.asText);
         this.date = new Date();
